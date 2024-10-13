@@ -29,6 +29,9 @@ const HomeScreen = ({ navigation }) => {
   const navigatToSquareScreen = () => {
     navigation.navigate("Square");
   };
+  const navigatToInputScreen = () => {
+    navigation.navigate("InputScreen");
+  };
 
   return (
     <View>
@@ -65,6 +68,12 @@ const HomeScreen = ({ navigation }) => {
         onPress={navigatToSquareScreen}
       >
         <Text style={styles.text}>Go to Square Demo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.navigation}
+        onPress={navigatToInputScreen}
+      >
+        <Text style={styles.text}>Go to Input Demo</Text>
       </TouchableOpacity>
     </View>
   );

@@ -7,6 +7,7 @@ import ImageScreen from "./src/screens/ImageScreen";
 import CounterScreen from "./src/screens/CounterScreen";
 import ColorScreen from "./src/screens/ColorScreen";
 import SquareScreen from "./src/screens/SquareScreen";
+import InputScreen from "./src/screens/InputScreen";
 
 /**
  * Creates a stack navigator with the specified route configuration and options.
@@ -28,6 +29,7 @@ const navigator = createStackNavigator(
     Counter: CounterScreen,
     Color: ColorScreen,
     Square: SquareScreen,
+    InputScreen: InputScreen,
   },
   {
     // Configuration options for the navigator.

@@ -1,63 +1,60 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useReducer } from "react";
+import { View, StyleSheet } from "react-native";
 import ColorCounter from "../components/ColorCounter";
 
+const initialState = { red: 0, green: 0, blue: 0 };
+
+const reducer = (state, action) => {
+  // state === {red: number, green: number, blue: number}
+  // action === {type: 'change_red' || 'change_green' || 'change_blue, payload: +10,-10}
+
+  switch (action.type) {
+    case "change_red":
+      return state.red + action.payload > 255 || state.red + action.payload < 0
+        ? state
+        : { ...state, red: state.red + action.payload };
+    case "change_green":
+      return state.green + action.payload > 255 ||
+        state.green + action.payload < 0
+        ? state
+        : { ...state, green: state.green + action.payload };
+    case "change_blue":
+      return state.blue + action.payload > 255 ||
+        state.blue + action.payload < 0
+        ? state
+        : { ...state, blue: state.blue + action.payload };
+    default:
+      return state;
+  }
+};
+
 const SquareScreen = () => {
-  const [redColor, setRedColor] = useState(0);
-  const [greenColor, setGreenColor] = useState(0);
-  const [blueColor, setBlueColor] = useState(0);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { red, green, blue } = state;
 
-  const CHANGE_COLOR = 10;
-
-  const setColor = (color, change) => {
-    // color === red, green, blue
-    // change === CHANGE_COLOR
-    if (color === "red") {
-      if (redColor + change > 255 || redColor - change < 0) {
-        return;
-      } else {
-        setRedColor(redColor + change);
-      }
-    }
-
-    if (color === "green") {
-      if (greenColor + change > 255 || greenColor - change < 0) {
-        return;
-      } else {
-        setGreenColor(greenColor + change);
-      }
-    }
-
-    if (color === "blue") {
-      if (blueColor + change > 255 || blueColor - change < 0) {
-        return;
-      } else {
-        setBlueColor(blueColor + change);
-      }
-    }
-  };
+  const CHANGE_COLOR = 15;
 
   const increaseRedColor = () => {
-    setColor("red", CHANGE_COLOR);
+    dispatch({ type: "change_red", payload: CHANGE_COLOR });
   };
 
   const decreaseRedColor = () => {
-    setColor("red", -1 * CHANGE_COLOR);
+    dispatch({ type: "change_red", payload: -1 * CHANGE_COLOR });
   };
 
   const increaseGreenColor = () => {
-    setColor("green", CHANGE_COLOR);
+    dispatch({ type: "change_green", payload: CHANGE_COLOR });
   };
 
   const decreaseGreenColor = () => {
-    setColor("green", -1 * CHANGE_COLOR);
+    dispatch({ type: "change_green", payload: -1 * CHANGE_COLOR });
   };
 
   const increaseBlueColor = () => {
-    setColor("blue", CHANGE_COLOR);
+    dispatch({ type: "change_blue", payload: CHANGE_COLOR });
   };
   const decreaseBlueColor = () => {
-    setColor("blue", -1 * CHANGE_COLOR);
+    dispatch({ type: "change_blue", payload: -1 * CHANGE_COLOR });
   };
 
   return (
@@ -81,7 +78,7 @@ const SquareScreen = () => {
         style={{
           height: 150,
           width: 150,
-          backgroundColor: `rgb(${redColor}, ${blueColor}, ${greenColor})`,
+          backgroundColor: `rgb(${red}, ${green} ,${blue})`,
           alignSelf: "center",
           marginTop: 20,
         }}
