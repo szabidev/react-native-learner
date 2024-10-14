@@ -10,19 +10,15 @@ const HomeScreen = ({ navigation }) => {
   const navigateToComponentsScreen = () => {
     navigation.navigate("Components");
   };
-
   const navigatToListScreen = () => {
     navigation.navigate("List");
   };
-
   const navigatToImageScreen = () => {
     navigation.navigate("ImageScreen");
   };
-
   const navigatToCounterScreen = () => {
     navigation.navigate("Counter");
   };
-
   const navigatToColorScreen = () => {
     navigation.navigate("Color");
   };
@@ -31,6 +27,9 @@ const HomeScreen = ({ navigation }) => {
   };
   const navigatToInputScreen = () => {
     navigation.navigate("InputScreen");
+  };
+  const navigatToBoxtScreen = () => {
+    navigation.navigate("Box");
   };
 
   return (
@@ -74,6 +73,9 @@ const HomeScreen = ({ navigation }) => {
         onPress={navigatToInputScreen}
       >
         <Text style={styles.text}>Go to Input Demo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.navigation} onPress={navigatToBoxtScreen}>
+        <Text style={styles.text}>Go to Box Demo</Text>
       </TouchableOpacity>
     </View>
   );
